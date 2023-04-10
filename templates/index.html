@@ -1,25 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Записи в блоге</h1>
-    {% if current_user.is_authenticated %}
-        <a href="news" class="btn btn-secondary">Добавить новость</a>
-    {% endif %}
-    {% for item in news %}
-        <div class="col-md6 border rounded">
-            <h2>{{ item.title }}</h2>
-            <div>
-                {{ item.content }}
-            </div>
-            <div>
-                Автор - {{ item.user.name }}, Дата написания - {{ item.created_date }}
-            </div>
-            {% if current_user.is_authenticated and current_user == item.user %}
-                <div>
-                    <a href="/news/{{ item.id }}" class="btn btn-warning">Изменить</a>
-                    <a href="/news_delete/{{ item.id }}" class="btn btn-danger">Удалить</a>
+    <div>
+        <div class="header-blue">
+            <div class="container hero">
+                <div class="row">
+                    <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+                        <h1>Business goal designs</h1>
+                        <p>Зрелищный экшен «Джон Уик 4» после своего третьего уикенда в прокате заработал свыше 300 млн долларов. В США фильм заработал 147,1 млн, а в России касса «Уика» выросла до 670 млн рублей, согласно данным ЕАИС. У четвёртого фильма серии есть шансы добраться до показателей предыдущего фильма, чьи мировые сборы в 2019 году составили 328 млн долларов.<br></p>
+                        <button
+                            class="btn btn-light btn-lg action-button" type="button">Learn More<i class="fa fa-long-arrow-right ml-2"></i></button>
+                    </div>
+                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
+                        <div class="iphone-mockup">
+						<img class="device" src="https://i.ytimg.com/vi/qEVUtrk8_B4/maxresdefault.jpg"  width="550" height="330">
+                          <!--  <div class="screen">
+							</div>
+
+							-->
+                        </div>
+                    </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
-    {% endfor %}
+    </div>
 {% endblock %}
