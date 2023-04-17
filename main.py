@@ -113,10 +113,7 @@ def reqister():
             hashed_password=form.password.data,
             name=form.name.data,
             surname=form.surname.data,
-            address=form.address.data,
-            speciality=form.speciality.data,
             age=form.age.data,
-            position=form.position.data,
             email=form.email.data
         )
         user.set_password(form.password.data)
