@@ -110,6 +110,7 @@ def reqister():
             return render_template('register.html', title='Регистрация', form=form,
                                    message="Такой пользователь уже есть")
         user = User(
+            hashed_password=form.password.data,
             name=form.name.data,
             surname=form.surname.data,
             address=form.address.data,
