@@ -98,6 +98,11 @@ def index():
     return render_template("index.html", news=news)
 
 
+@app.route("/test")
+def test():
+    return render_template("test.html")
+
+
 @app.route("/profile/<nickname>")
 def profile(nickname):
     db_sess = db_session.create_session()
