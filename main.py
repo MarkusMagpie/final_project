@@ -98,6 +98,16 @@ def index():
     return render_template("index.html", news=news)
 
 
+@app.route("/profile/<nickname>")
+def profile(nickname):
+    db_sess = db_session.create_session()
+    # if current_user.is_authenticated:
+    users = db_sess.query(User).filter(User.nickname == nickname).first()
+    # else:
+    # news = db_sess.query(News).filter(News.is_private != True)
+    return render_template("user_profile.html", user=users)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -111,12 +121,7 @@ def reqister():
                                    message="Такой пользователь уже есть")
         user = User(
             hashed_password=form.password.data,
-            name=form.name.data,
-            surname=form.surname.data,
-            address=form.address.data,
-            speciality=form.speciality.data,
-            age=form.age.data,
-            position=form.position.data,
+            nickname=form.nickname.data,
             email=form.email.data
         )
         user.set_password(form.password.data)
