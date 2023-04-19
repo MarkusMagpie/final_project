@@ -106,11 +106,13 @@ def test():
 @app.route("/profile/<nickname>")
 def profile(nickname):
     db_sess = db_session.create_session()
-    # if current_user.is_authenticated:
     users = db_sess.query(User).filter(User.nickname == nickname).first()
-    # else:
-    # news = db_sess.query(News).filter(News.is_private != True)
     return render_template("user_profile.html", user=users)
+
+
+@app.route("/film/JohnWick4")
+def profile():
+    return render_template("JohnWick4.html")
 
 
 @app.route('/register', methods=['GET', 'POST'])
