@@ -5,6 +5,7 @@ from forms.news import NewsForm
 from forms.user import RegisterForm, LoginForm
 from data.news import News
 from data.users import User
+from data.films import Film
 from data import db_session
 
 app = Flask(__name__)
