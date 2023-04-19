@@ -111,7 +111,7 @@ def profile(nickname):
 
 
 @app.route("/film/JohnWick4")
-def profile():
+def film1():
     return render_template("JohnWick4.html")
 
 
