@@ -5,5 +5,4 @@ from wtforms.validators import DataRequired
 
 class FilmsForm(FlaskForm):
     title = StringField('Заголовок', validators=[DataRequired()])
-    content = TextAreaField("Содержание")
     submit = SubmitField('Применить')
