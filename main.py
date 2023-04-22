@@ -43,11 +43,16 @@ def film1(film_id):
         news = News()
         news.title = form.title.data
         news.content = form.content.data
-        current_user.news.append(news)
-        db_sess.merge(current_user)
-        local_object = db_sess.merge(news)
-        film.news.append(local_object)
-        db_sess.merge(film)
+
+        news.user = current_user
+        news.film = film
+        db_sess.merge(news)
+        #current_user.news.append(news)
+        #film.news.append(news)
+        #db_sess.merge(current_user)
+        # local_object = db_sess.merge(news)
+        # db_sess.merge(film)
+
         db_sess.commit()
         return redirect('/')
     return render_template("JohnWick4.html", film=film, form=form, reviews=review)
