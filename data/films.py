@@ -12,12 +12,18 @@ class Film(SqlAlchemyBase, UserMixin):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     title = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    content = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    date = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    country = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    genre = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    producer = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    director = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    budget = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    box_office = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    length = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    raiting = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
 
-    user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
-    user = orm.relationship('User')
-    categories = orm.relationship("Category", secondary="association", backref="films")
+    news = orm.relationship("News", back_populates='film')
 
     def __repr__(self):
-        return f'<User> {self.id} {self.name} {self.email}'
+        return f'<Film> {self.id} {self.title} {self.about}'

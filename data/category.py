@@ -8,7 +8,9 @@ association_table = sqlalchemy.Table('association', SqlAlchemyBase.metadata,
                                      sqlalchemy.Column('category', sqlalchemy.Integer,
                                                        sqlalchemy.ForeignKey('category.id')),
                                      sqlalchemy.Column('films', sqlalchemy.Integer,
-                                                       sqlalchemy.ForeignKey('films.id'))
+                                                       sqlalchemy.ForeignKey('films.id')),
+                                     sqlalchemy.Column('users', sqlalchemy.Integer,
+                                                       sqlalchemy.ForeignKey('users.id'))
                                      )
 
 

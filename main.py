@@ -33,19 +33,30 @@ def main():
     app.run()
 
 
-@app.route('/news', methods=['GET', 'POST'])
-@login_required
-def add_news():
-    form = FilmsForm()
+@app.route("/film/<film_id>", methods=['GET', 'POST'])
+def film1(film_id):
+    db_sess = db_session.create_session()
+    film = db_sess.query(Film).filter(Film.id == film_id).first()
+    review = db_sess.query(News).filter(News.film_id == film.id)
+    form = NewsForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
-        news = Film()
+        news = News()
         news.title = form.title.data
         news.content = form.content.data
-        current_user.films.append(news)
+        current_user.news.append(news)
         db_sess.merge(current_user)
+        local_object = db_sess.merge(news)
+        film.news.append(local_object)
+        db_sess.merge(film)
         db_sess.commit()
         return redirect('/')
+    return render_template("JohnWick4.html", film=film, form=form, reviews=review)
+
+
+@app.route('/<int:id>/news', methods=['GET', 'POST'])
+@login_required
+def add_news(cur_id):
+
     return render_template('news.html', title='Добавление рецензии на фильм', form=form)
 
 
@@ -107,11 +118,6 @@ def profile(nickname):
     db_sess = db_session.create_session()
     users = db_sess.query(User).filter(User.nickname == nickname).first()
     return render_template("user_profile.html", user=users)
-
-
-@app.route("/film/JohnWick4")
-def film1():
-    return render_template("JohnWick4.html")
 
 
 @app.route('/register', methods=['GET', 'POST'])
