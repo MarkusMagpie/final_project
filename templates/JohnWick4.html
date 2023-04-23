@@ -124,7 +124,7 @@
               <div class="card mb-3" style="height: 92%;">
                 <div class="card-body" >
                     <h2>{{i.title}}</h2>
-                    {{i.created_date}}</br>
+                    {{i.created_date.strftime('%m/%d/%Y в %H:%M')}}</br>
                     Автор: <a class="navbar-brand" href="/profile/{{i.user.nickname}}">{{i.user.nickname}}</a>
                     <div class="col-lg-8">
               <p class="text-muted fw-light mb-4">
