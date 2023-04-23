@@ -121,8 +121,9 @@ def test():
 @app.route("/profile/<nickname>")
 def profile(nickname):
     db_sess = db_session.create_session()
-    users = db_sess.query(User).filter(User.nickname == nickname).first()
-    return render_template("user_profile.html", user=users)
+    user = db_sess.query(User).filter(User.nickname == nickname).first()
+    review = db_sess.query(News).filter(News.user_id == user.id)
+    return render_template("user_profile.html", user=user, reviews=review)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -139,7 +140,8 @@ def reqister():
         user = User(
             hashed_password=form.password.data,
             nickname=form.nickname.data,
-            email=form.email.data
+            email=form.email.data,
+            about=form.about.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)
