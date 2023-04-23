@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request, abort, url_for
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from waitress import serve
 
 from forms.news import NewsForm
 from forms.films import FilmsForm
@@ -30,7 +31,7 @@ def logout():
 
 def main():
     db_session.global_init("db/blogs.db")
-    app.run()
+    app.run(port='4999')
 
 
 @app.route("/film/<film_id>", methods=['GET', 'POST'])
@@ -61,7 +62,7 @@ def film1(film_id):
 @app.route('/<int:id>/news', methods=['GET', 'POST'])
 @login_required
 def add_news(cur_id):
-
+    form=FilmsForm()
     return render_template('news.html', title='Добавление рецензии на фильм', form=form)
 
 
