@@ -58,50 +58,12 @@ def film1(film_id):
         return redirect('/')
     return render_template("JohnWick4.html", film=film, form=form, reviews=review)
 
-
+#! метка на удаление 
 @app.route('/<int:id>/news', methods=['GET', 'POST'])
 @login_required
 def add_news(cur_id):
     form=FilmsForm()
     return render_template('news.html', title='Добавление рецензии на фильм', form=form)
-
-
-@app.route('/news_delete/<int:id>', methods=['GET', 'POST'])
-@login_required
-def news_delete(id):
-    db_sess = db_session.create_session()
-    news = db_sess.query(Film).filter(Film.id == id, Film.user == current_user).first()
-    if news:
-        db_sess.delete(news)
-        db_sess.commit()
-    else:
-        abort(404)
-    return redirect('/')
-
-
-@app.route('/news/<int:id>', methods=['GET', 'POST'])
-@login_required
-def edit_news(id):
-    form = FilmsForm()
-    if request.method == "GET":
-        db_sess = db_session.create_session()
-        news = db_sess.query(Film).filter(Film.id == id, Film.user == current_user).first()
-        if news:
-            form.title.data = news.title
-            form.content.data = news.content
-        else:
-            abort(404)
-    if form.validate_on_submit():
-        db_sess = db_session.create_session()
-        news = db_sess.query(Film).filter(Film.id == id, Film.user == current_user).first()
-        if news:
-            news.title = form.title.data
-            news.content = form.content.data
-            db_sess.commit()
-            return redirect('/')
-        else:
-            abort(404)
-    return render_template('news.html', title='Редактирование рецензии на фильм', form=form)
 
 
 @app.route("/")
@@ -112,11 +74,6 @@ def index():
     else:
         news = db_sess.query(News).filter(News.is_private != True)
     return render_template("index.html", news=news)
-
-
-@app.route("/test")
-def test():
-    return render_template("test.html")
 
 
 @app.route("/profile/<nickname>")
