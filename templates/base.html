@@ -27,7 +27,7 @@
                         </form>
                         {% if current_user.is_authenticated %}
                             <li class="nav-item dropdown" style="list-style-type: none; right: 3%;"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">{{ current_user.nickname }}</a>
-                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/profile/{{ current_user.nickname }}">Об аккаунте</a><a class="dropdown-item" role="presentation" href="/news">Написать рецензию</a><a class="dropdown-item" role="presentation" href="/logout">Выйти</a></div>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/profile/{{ current_user.nickname }}">Об аккаунте</a><a class="dropdown-item" role="presentation" href="/logout">Выйти</a></div>
                             </li>
                         {% else %}
                             <p>
