@@ -135,6 +135,8 @@
               </div>
             </div>
         {% endfor %}
+
+        {% if current_user.is_authenticated %}
           <div class="container hero">
               <div class="card mb-3" style="height: 92%;">
                 <div class="card-body" >
@@ -165,6 +167,9 @@
                 </div>
               </div>
             </div>
+        {% else %}
+        <h2>Зарегестрируйтесь или войдите под своим аккаунтом чтобы написать рецензию</h2>
+        {% endif %}
         </div>
     </div>
 {% endblock %}
